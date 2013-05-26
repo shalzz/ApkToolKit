@@ -2,7 +2,7 @@
 setlocal EnableDelayedExpansion
 SET lf=-
 SET /p name=Please enter apk name/path:
-FOR /F "delims=" %%i IN ('tools\aapt dump badging %name%') DO if ("!out!"=="") (set out=%%i) else (set out=!out!%lf%%%i)
+FOR /F "delims=" %%i IN ('tools\aapt dump badging "%name%"') DO if ("!out!"=="") (set out=%%i) else (set out=!out!%lf%%%i)
 FOR /F "tokens=2 delims='" %%f IN ('echo %out%') DO set pckname=%%f 
 
 

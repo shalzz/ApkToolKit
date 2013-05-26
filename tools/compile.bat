@@ -1,1 +1,1 @@
-tools\apktool b %name%  %name%.apk
+tools\apktool b "%name%"  "%name%.apk"

@@ -27,17 +27,17 @@ goto start1
 :srcNres
 SET /p name=Please enter apk name/path:
 set name=%name:~0,-4%
-tools\apktool d -f %name%.apk %name%
+tools\apktool d -f "%name%.apk" "%name%"
 
 :src
 SET /p name=Please enter apk name/path:
 set name=%name:~0,-4%
-tools\apktool d -f -r %name%.apk %name%
+tools\apktool d -f -r "%name%.apk" "%name%"
 
 :res
 SET /p name=Please enter apk name/path:
 set name=%name:~0,-4%
-tools\apktool d -f -s %name%.apk %name%
+tools\apktool d -f -s "%name%.apk" "%name%"
 
 :exit
 exit /b 1

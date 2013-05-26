@@ -69,7 +69,7 @@ restart
 SET /p name=Please enter apk name/path:
 set name=%name:~0,-4%
 ECHO I: Signing...
-java -Xmx512m -jar tools\signapk.jar -w tools\testkey.x509.pem tools\testkey.pk8 %name%.apk  %name%_signed.apk
+java -Xmx512m -jar tools\signapk.jar -w tools\testkey.x509.pem tools\testkey.pk8 "%name%.apk"  "%name%_signed.apk"
 if %errorlevel%==0 (
 ECHO I: Apk Signed
 ECHO I: %name%_signed.apk Created
@@ -83,7 +83,7 @@ goto start
 SET /p name=Please enter apk name/path:
 set name=%name:~0,-4%
 ECHO I: Zipaligning...
-tools\zipalign 4 %name%.apk %name%_zip.apk
+tools\zipalign 4 "%name%.apk" "%name%_zip.apk"
 if %errorlevel%==0 (
 ECHO I: Apk Zipaligned
 ECHO I: %name%_zip.apk Created
@@ -97,11 +97,11 @@ goto start
 SET /p name=Please enter apk name/path:
 set name=%name:~0,-4%
 ECHO I: Signing...
-java -Xmx512m -jar tools\signapk.jar -w tools\testkey.x509.pem tools\testkey.pk8 %name%.apk  %name%_signed.apk
+java -Xmx512m -jar tools\signapk.jar -w tools\testkey.x509.pem tools\testkey.pk8 "%name%.apk"  "%name%_signed.apk"
 if %errorlevel%==0  (
 ECHO I: Zipping...
-tools\zipalign 4 %name%_signed.apk %name%_snz.apk
-del %name%_signed.apk
+tools\zipalign 4 "%name%_signed.apk" "%name%_snz.apk"
+del "%name%_signed.apk"
 )
 if %errorlevel%==0 (
 ECHO I: Apk Signed And Zipaligned
@@ -124,17 +124,17 @@ SET /p name=Please enter Folder name/path:
  call tools\compile.bat
 if %errorlevel%==0 (
 ECHO I: Signing...
-java -Xmx512m -jar tools\signapk.jar -w tools\testkey.x509.pem tools\testkey.pk8 %name%.apk  %name%_signed.apk
+java -Xmx512m -jar tools\signapk.jar -w tools\testkey.x509.pem tools\testkey.pk8 "%name%.apk"  "%name%_signed.apk"
 )
 if %errorlevel%==0 (
 ECHO I: Zipping...
-tools\zipalign 4 %name%_signed.apk %name%_csnz.apk
-del %name%.apk
-del %name%_signed.apk
+tools\zipalign 4 "%name%_signed.apk" "%name%_csnz.apk"
+del "%name%.apk"
+del "%name%_signed.apk"
 )
 if %errorlevel%==0 (
 ECHO I: Apk Compiled, Signed And Zipaligned
-ECHO I: Apk "%name%_csnz.apk" Created
+ECHO I: Apk %name%_csnz.apk Created
 )
 @pause
 cls  
@@ -142,8 +142,7 @@ goto start
 
 :install
 SET /p name=Please enter apk name/path:
-set name=%name:~0,-4%
-tools\adb  install %name%
+tools\adb  install "%name%"
 @pause
 cls  
 goto start
@@ -160,12 +159,12 @@ SET /p name=Please enter Folder name/path:
  call tools\compile.bat
 if %errorlevel%==0 (
 ECHO I:Zipping...
-tools\zipalign 4 %name%.apk %name%_zip.apk
+tools\zipalign 4 "%name%.apk" "%name%_zip.apk"
 )
 if %errorlevel%==0 (
 ECHO I: Apk Compiled and Zipaligned 
-ECHO I: Apk "%name%_zip.apk" Created
-del %name%.apk
+ECHO I: Apk %name%_zip.apk Created
+del "%name%.apk"
 )
 @pause
 cls  
@@ -173,9 +172,8 @@ goto start
 
 :push
 SET /p name=Please enter apk name/path:
-set name=%name:~0,-4%
 tools\adb remount
-tools\adb push %name%.apk /system/app
+tools\adb push "%name%" /system/app
 @pause
 cls  
 goto start
