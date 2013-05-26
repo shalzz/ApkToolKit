@@ -2,12 +2,14 @@
 :start
 set /a str=0
 :start0
+set option = null
+set name = null
 
 ECHO  --------------------------------------------------------------------------------------------------------------------------
 ECHO    Please choose one of the options:
 ECHO  ------------------------------------
 ECHO    1  Decompile apk
-ECHO    2  Compile apk
+ECHO    2  Recompile apk
 ECHO    3  Sign apk
 ECHO    4  Zipalign apk
 ECHO    5  Sign and Zipalign apk

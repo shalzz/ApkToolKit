@@ -20,5 +20,5 @@ ECHO I: Installling apk
 tools\adb  install %name%
 )
 if %errorlevel%==0  (
-ECHO I: %name%.apk Installed
+ECHO I: %name% Installed
 )

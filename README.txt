@@ -3,7 +3,7 @@ A BATCH file for working with APK's
 
 Features:
 Decompile 
-Compile 
+Recompile 
 Sign 
 Zipalign
 Install 
