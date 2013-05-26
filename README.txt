@@ -9,3 +9,8 @@ Zipalign
 Install 
 Clean Install  
 Push 
+
+Credits:
+Brut.all
+iBotPeaches
+jesusfreke
