@@ -22,3 +22,5 @@ tools\adb  install %name%
 if %errorlevel%==0  (
 ECHO I: %name% Installed
 )
+
+endlocal

@@ -8,16 +8,17 @@ set name = null
 ECHO  --------------------------------------------------------------------------------------------------------------------------
 ECHO    Please choose one of the options:
 ECHO  ------------------------------------
-ECHO    1  Decompile apk
-ECHO    2  Recompile apk
-ECHO    3  Sign apk
-ECHO    4  Zipalign apk
-ECHO    5  Sign and Zipalign apk
-ECHO    6  Compile, Sign and Zipalign apk
-ECHO    7  Compile and Zipalign  apk
-ECHO    8  Install apk
-ECHO    9  Clean Install apk 
-ECHO   10  Push apk
+ECHO    1   Decompile apk
+ECHO    2   Recompile apk
+ECHO    3   Sign apk
+ECHO    4   Zipalign apk
+ECHO    5   Sign and Zipalign apk
+ECHO    6   Compile, Sign and Zipalign apk
+ECHO    7   Compile and Zipalign  apk
+ECHO    8   Install apk
+ECHO    9   Clean Install apk 
+ECHO    10  Push apk
+ECHO    11  Select java VM heapsize
 ECHO  --------------------------------------------------------------------------------------------------------------------------
 SET /p option=Please enter one of the options:
 
@@ -31,9 +32,10 @@ if %option%==7  ( goto ComZip )         else set /a er=er+1
 if %option%==8  ( goto install )        else set /a er=er+1
 if %option%==9  ( goto cleaninstall )   else set /a er=er+1
 if %option%==10 ( goto push )           else set /a er=er+1
+if %option%==11 ( goto heap )           else set /a er=er+1
 
 :noOption
-if %er% GEQ 10 ( 
+if %er% GEQ 11 ( 
 Echo Error!
 Echo Please enter a correct option
 @pause
@@ -70,8 +72,7 @@ restart
 :sign
 SET /p name=Please enter apk name/path:
 set name=%name:~0,-4%
-ECHO I: Signing...
-java -Xmx512m -jar tools\signapk.jar -w tools\testkey.x509.pem tools\testkey.pk8 "%name%.apk"  "%name%_signed.apk"
+call tools\sign.bat
 if %errorlevel%==0 (
 ECHO I: Apk Signed
 ECHO I: %name%_signed.apk Created
@@ -98,8 +99,7 @@ goto start
 :signNzip
 SET /p name=Please enter apk name/path:
 set name=%name:~0,-4%
-ECHO I: Signing...
-java -Xmx512m -jar tools\signapk.jar -w tools\testkey.x509.pem tools\testkey.pk8 "%name%.apk"  "%name%_signed.apk"
+call tools\sign.bat
 if %errorlevel%==0  (
 ECHO I: Zipping...
 tools\zipalign 4 "%name%_signed.apk" "%name%_snz.apk"
@@ -125,8 +125,7 @@ restart
 SET /p name=Please enter Folder name/path:
  call tools\compile.bat
 if %errorlevel%==0 (
-ECHO I: Signing...
-java -Xmx512m -jar tools\signapk.jar -w tools\testkey.x509.pem tools\testkey.pk8 "%name%.apk"  "%name%_signed.apk"
+call tools\sign.bat
 )
 if %errorlevel%==0 (
 ECHO I: Zipping...
@@ -180,7 +179,11 @@ tools\adb push "%name%" /system/app
 cls  
 goto start
 
-
+:heap
+call tools\heap.bat
+@pause
+cls  
+goto start
 
 
 
