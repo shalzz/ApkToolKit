@@ -1,3 +1,5 @@
+@ECHO off
+
 REM    ApkToolKit is a software which eases the process of working with apk's 
 REM    Copyright (C) 2013  
 REM	   Shaleen Jain
@@ -24,7 +26,6 @@ REM
 REM    You should have received a copy of the GNU General Public License
 REM    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-@ECHO off
 :start
 set /a str=0
 :start0
